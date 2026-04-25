@@ -1,0 +1,62 @@
+# Config Example for Lianghua
+
+# 数据配置
+data:
+  provider: "tushare"  # tushare, akshare, yahoo, mongodb
+  api_key: "your_api_key_here"
+  cache_dir: "./data/cache"
+  use_cache: true
+
+# 策略配置
+strategy:
+  name: "MovingAverageCrossover"
+  params:
+    fast_period: 5
+    slow_period: 20
+
+# 资金配置
+portfolio:
+  initial_cash: 1000000
+  symbols:
+    - "000001.SH"
+    - "600000.SH"
+    - "000002.SZ"
+
+# 风险管理配置
+risk:
+  max_single_position: 0.1        # 单票最大仓位 10%
+  max_daily_loss: 0.05            # 单日最大亏损 5%
+  max_total_drawdown: 0.2         # 总最大回撤 20%
+  position_scaling: "volatility"  # fixed, volatility, equal
+  target_volatility: 0.15         # 目标年化波动率 15%
+  use_stop_loss: true
+  stop_loss_atr_multiple: 2.0
+  use_take_profit: false
+  take_profit_pct: 0.10
+
+# 执行配置
+execution:
+  mode: "backtest"  # backtest, live
+  broker: "simulation"  # simulation, xtp, ctp, binance
+  commission_rate: 0.0003  # 万三佣金
+  slippage_pct: 0.001      # 千一滑点
+  min_commission: 5        # 最低佣金5元
+
+# 回测配置
+backtest:
+  start_date: "2020-01-01"
+  end_date: "2024-01-01"
+  initial_cash: 1000000
+  timeframe: "daily"  # daily, 1h, 30m, 5m, 1m
+
+# 日志配置
+logging:
+  level: "INFO"
+  file: "./logs/trading.log"
+  structured: true
+
+# 输出配置
+output:
+  results_dir: "./results"
+  save_trades: true
+  plot_results: true

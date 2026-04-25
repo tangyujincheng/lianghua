@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  lianghua:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    volumes:
+      - ./config:/app/config
+      - ./results:/app/results
+      - ./data:/app/data
+    environment:
+      - TZ=Asia/Shanghai
+    restart: unless-stopped
+    command: python scripts/run_live.py --config config/config.yaml
